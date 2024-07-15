@@ -1,0 +1,229 @@
+body {
+    display: flex;
+    flex-direction: column;  
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    color: #000000;
+    background: #f9f9f9;
+    margin: 0;
+}
+
+.container {
+    flex: 1;
+}
+
+.navbar {
+    height: 5rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #fe424d !important;
+    margin-right: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ff6b6f !important;
+}
+
+/* Footer */
+.f-info-links a {
+    text-decoration: none;
+    color: #222;
+    transition: color 0.3s ease;
+}
+
+.f-info-links a:hover {
+    color: #fe424d;
+    text-decoration: underline;
+}
+
+.f-info-links, .f-info-social, .f-info-brand {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.f-info-social i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    background-color: #ebebeb;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Cards */
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+}
+
+.listing-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    border-radius: 1rem 1rem 0 0 !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 1rem !important;
+}
+
+.card-text {
+    font-weight: 400;
+    color: #666;
+}
+
+.listing-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-img-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Buttons */
+.add-btn, .edit-btn {
+    background-color: #fe424d !important;
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.add-btn:hover, .edit-btn:hover {
+    background-color: #ff6b6f !important;
+}
+
+/* Show Page */
+.show-img { 
+    height: 30vh;
+    object-fit: cover;
+}
+
+.btns {
+    display: flex;
+    gap: 1rem;
+}
+
+.show-card {
+    padding: 0;
+}
+
+.editImg img {
+    height: 250px;
+    width: 250px;
+    border-radius: 0.5rem;
+}
+
+/* Map */
+#map {
+    height: 400px;
+    width: 80vh;
+    margin-bottom: 2rem;
+}
+
+/* HotLines */
+#filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.filters {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.filters:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.tax-info {
+    display: none;
+}
+
+.tax-toggle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.9rem;
+    padding: 1rem;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    transition: border-color 0.3s ease;
+}
+
+.tax-toggle:hover {
+    border-color: #fe424d;
+}
+
+/* Search Bar */
+.d-flex button {
+    background-color: #fe424d;
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.d-flex button:hover {
+    background-color: #ff6b6f;
+}
+
+.d-flex button i {
+    margin-right: 0.5rem;
+}
+
+.d-flex input {
+    border-radius: 50px;
+    border: 2px solid #fe424d;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.d-flex input:focus {
+    border-color: #ff6b6f;
+}
