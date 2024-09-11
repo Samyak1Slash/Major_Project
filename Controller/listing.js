@@ -12,16 +12,44 @@ module.exports.renderNewForm=(req,res)=>{
     res.render("listings/new.ejs");
 };
 
-module.exports.showListings=async(req,res)=>{
-    let {id}=req.params;
-    // abhi .populate("review") se humne kuch aur likha just ike nieech toh use nested populate kehetehai means haar ek review ke lliye auther ki value
-    const listing= await Listing.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner"); // ye joh varible bnae udhar pass kiya isis se listing. -- aise acces kiye show.ejs mein
-    if(!listing){
-        req.flash("error","Listing you requested for is does not exists!!");
-        res.redirect("/listings");
+// module.exports.showListings=async(req,res)=>{
+//     let {id}=req.params;
+//     // abhi .populate("review") se humne kuch aur likha just ike nieech toh use nested populate kehetehai means haar ek review ke lliye auther ki value
+//     const listing= await Listing.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner"); // ye joh varible bnae udhar pass kiya isis se listing. -- aise acces kiye show.ejs mein
+//     if(!listing){
+//         req.flash("error","Listing you requested for is does not exists!!");
+//         res.redirect("/listings");
+//     }
+//     res.render("listings/show.ejs",{listing});
+// };
+
+module.exports.showListings = async (req, res) => {
+    let { id } = req.params;
+    const filter = req.query.filter; // Get the filter type from query parameters
+
+    // Fetch the listing with reviews and owner populated
+    let listing = await Listing.findById(id).populate({ path: "reviews", populate: { path: "author" } }).populate("owner");
+
+    if (!listing) {
+        req.flash("error", "Listing you requested for does not exist!!");
+        return res.redirect("/listings");
     }
-    res.render("listings/show.ejs",{listing});
+
+    // Filter reviews based on sentiment score
+    if (filter === 'positive') {
+        listing.reviews = listing.reviews.filter(review => review.sentimentScore > 0);
+    } else if (filter === 'negative') {
+        listing.reviews = listing.reviews.filter(review => review.sentimentScore < 0);
+    } else if (filter === 'neutral') {
+        listing.reviews = listing.reviews.filter(review => review.sentimentScore === 0);
+    }
+
+     
+
+    // Render the listing view with filtered reviews
+    res.render("listings/show.ejs", { listing });
 };
+
 
 module.exports.createNewListing=async(req,res,next)=>{ 
     

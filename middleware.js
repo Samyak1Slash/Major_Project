@@ -32,7 +32,7 @@ module.exports.isOwner = async(req,res,next)=>{
     next();
 };
 
-module.exports.validateListing=(req,res,next)=>{
+module.exports.validateListing=(req,res,next)=>{  //1st MW we used
     console.log(req.body);
     let {error}=listingSchema.validate(req.body);
     if(error){
@@ -44,7 +44,7 @@ module.exports.validateListing=(req,res,next)=>{
     }
 };
 
-module.exports.validateReview=(req,res,next)=>{
+module.exports.validateReview=(req,res,next)=>{ // 2nd MW we used
     let {error}=reviewSchema.validate(req.body);
     if(error){
         console.log(error);

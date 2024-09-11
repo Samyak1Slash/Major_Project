@@ -18,6 +18,8 @@ const session=require("express-session");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const User=require("./models/user.js");
+const Sentiment = require('sentiment');
+const sentiment = new Sentiment();
 
 const sessionOptions= {
     secret:process.env.SECRET,
@@ -36,13 +38,16 @@ const sessionOptions= {
 app.use(session(sessionOptions));    //ye dono falsh and session ko Apnr Listing and review se pehele likhna hhoga
 app.use(flash())//Ye apn filhaal toh apne new listing ke baad pop up krne ke liye
 
-//configuring Strategy
+//configuring Strategy ise session ke neeche likhna hoga 
 app.use(passport.initialize()); // dekh bhai agar loi bhi cheez samj naa aye to uska documenteion dekhon npm pe express pei sab mil jyga
-app.use(passport.session());
+app.use(passport.session());//ise add krna ka matlb web browser ko pta hona magnta agar user browsw page to page is same or not isliye for each req hume baar baar user se login na krvana pade
 passport.use(new LocalStrategy (User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+
+
 
 
 app.use((req,res,next)=>{
@@ -116,6 +121,8 @@ app.use("/",userRouter);
 //     console.log("Sample was saved");
 //     res.send("Successful testing");  
 // })
+
+
 app.all("*",(req,res,next)=>{
     next(new ExpressError(404,"Page Not Found"));
 })
