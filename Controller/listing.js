@@ -1,6 +1,7 @@
 const Listing=require("../models/listing.js");
+const User=require("../models/user.js");
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-const mapToken=process.env.MAP_TOKEN;
+const mapToken=process.env.MAP_TOKEN;   
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 module.exports.index=async (req,res)=>{
@@ -128,3 +129,22 @@ module.exports.deleteListing=async (req,res)=>{
         }
 
  };
+
+
+ module.exports.likeListing = async (req, res) => {
+    const { id } = req.params;
+    const userId = req.user._id; // Get the current logged-in user
+    const listing = await Listing.findById(id);
+    const user = await User.findById(userId);
+
+    // If the listing is already liked, unlike it
+    if (user.likes.includes(id)) {
+        user.likes.pull(id); // Remove listing from likes
+    } else {
+        user.likes.push(id); // Add listing to likes
+    }
+
+    await user.save();
+    res.redirect(`/listings/${id}`);
+};
+

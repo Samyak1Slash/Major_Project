@@ -1,4 +1,7 @@
 const User=require("../models/user");
+const Listing = require('../models/listing');
+
+
 
 module.exports.signUp=async(req,res)=>{  //eben if Wrap Async is there we add try catch insted of only showing error it will automaticluu redirect to sigunup page
     try{
@@ -35,4 +38,15 @@ module.exports.logOut=(req,res)=>{
         req.flash("success","You are Logged Out now");
         res.redirect("/login");
     })
+};
+
+
+
+module.exports.showLikedListings = async (req, res) => {
+    const user = await User.findById(req.params.id).populate('likes'); // Assuming "likes" is an array in your User model referencing listings
+    if (!user) {
+        req.flash('error', 'User not found!');
+        return res.redirect('/listings');
+    }
+    res.render('users/likes', { user });
 };

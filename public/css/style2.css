@@ -257,4 +257,14 @@ body {
     border-color: #007bff;
     transform: scale(1.05);
 }
-    
+
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .like-btn i {
+    font-size: 1.5rem; /* Adjust size as needed */
+  }

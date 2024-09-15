@@ -8,6 +8,8 @@ const userSchema=new Schema({
         type:String,
         required:true     //***IMP***Hum sirf email define krr rhe hai baaki passport local mongoose khud se username and password with hashing and salting add krta hai
     },
+    // Adding a 'likes' array to store the ObjectIds of liked listings
+    likes: [{ type: Schema.Types.ObjectId, ref: 'Listing' }],
 
 });
 

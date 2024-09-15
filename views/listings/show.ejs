@@ -1,4 +1,7 @@
 <% layout("/layouts/boilerplate") %>
+<!-- Include Mapbox GL JS and CSS -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
 <script>
   const mapToken = "<%=process.env.MAP_TOKEN %>";
   const listing = <%= JSON.stringify(listing) %>;
@@ -15,6 +18,18 @@
           <p class="card-text price">&#8377; <%= listing.price.toLocaleString("en-IN") %></p>
           <p class="card-text location"><%= listing.location %></p>
           <p class="card-text country"><%= listing.country %></p>
+
+          <% if (currUser) { %>
+            <form action="/listings/<%= listing._id %>/like" method="POST" style="display:inline;">
+              <button type="submit" class="like-btn">
+                <% if (currUser.likes.includes(listing._id)) { %>
+                  <i class="fa-solid fa-heart" style="color: red;"></i> <!-- Filled red heart for liked -->
+                <% } else { %>
+                  <i class="fa-regular fa-heart"></i> <!-- Hollow heart for not liked -->
+                <% } %>
+              </button>
+            </form>
+          <% } %>
         </div>
       </div>
 

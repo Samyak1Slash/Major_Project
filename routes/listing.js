@@ -77,6 +77,11 @@ router.get("/:id/edit",isLoggedin,isOwner,wrapAsync(listingController.editListin
 
 //SEARCH
 
+//Like or Unlike
+router.post('/:id/like', isLoggedin, listingController.likeListing);
+
+
+
 
 
 module.exports=router;

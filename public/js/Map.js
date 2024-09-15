@@ -1,19 +1,20 @@
-//As you can see here is lots of error coz we cant access .env yokens to js only ejs so what will we do is send a script
+//As you can see here is lots of error coz we cant access .env tokens to js only ejs so what will we do is send a script
 //(whivh contain env varibles) from ejs to thisjs and use the varible
 
+// Set the Mapbox access token (passed from EJS)
+mapboxgl.accessToken = mapToken;
 
-    mapboxgl.accessToken = mapToken;
-    const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        style:"mapbox://style/mapbox/dark-v11",//Style
-        center:listing.geometry.coordinates, // starting position [lng, lat]. Note that lat must be set between -90 and 90
-        zoom: 9 // starting zoom
-    });
+// Create a new Mapbox map instance
+const map = new mapboxgl.Map({
+    container: 'map', // ID of the container where the map will be rendered
+    style: 'mapbox://styles/mapbox/dark-v11', // Map style
+    center: listing.geometry.coordinates, // Starting position [lng, lat]
+    zoom: 9 // Initial zoom level
+});
 
-    // console.log(coordinates);
-
-    const marker1 = new mapboxgl.Marker({color:"Red"})
-    .setLngLat(listing.geometry.coordinates) //Listing.f=geometry.coordinates
-    .setPopup(new mapboxgl.Popup({offset: 25})
-    .setHTML(`<h5>${listing.location}</h5><p>Exact Location will be Provided after booking</p>`))
-    .addTo(map);  
+// Add a marker at the listing coordinates
+const marker = new mapboxgl.Marker({ color: "red" })
+    .setLngLat(listing.geometry.coordinates) // Coordinates of the listing
+    .setPopup(new mapboxgl.Popup({ offset: 25 }) // Add a popup on click
+    .setHTML(`<h5>${listing.location}</h5><p>Exact Location will be provided after booking.</p>`)) 
+    .addTo(map); // Add marker to the map
